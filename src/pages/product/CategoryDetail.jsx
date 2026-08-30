@@ -16,8 +16,6 @@ const UI_TEXT = {
     en: 'No products found in this category.',
   },
   addToCart: { uz: 'Savatga qo‘shish', ru: 'В корзину', en: 'Add to cart' },
-  cartItemsCount: { uz: 'ta mahsulot', ru: 'товаров', en: 'items' },
-  emptyCart: { uz: 'Savat boʻsh', ru: 'Корзина пуста', en: 'Cart is empty' },
 };
 
 export default function CategoryDetail({
@@ -25,28 +23,12 @@ export default function CategoryDetail({
   currentLang = 'ru',
   onBack,
   onChangeLang,
-  cartItems = [],
-  onAddToCart,
-  onRemoveFromCart,
-  onOpenCart,
+  // onAddToCart,
 }) {
   const [productsList, setProductsList] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
-
-  // Savatdagi umumiy soni va umumiy summasi
-  const totalCartCount = cartItems.reduce((acc, item) => acc + (item.quantity || 1), 0);
-  const totalCartPrice = cartItems.reduce(
-    (acc, item) => acc + item.price * (item.quantity || 1),
-    0
-  );
-
-  // Mahsulot savatda bor-yo'qligini va uning miqdorini aniqlash
-  const getItemQuantity = (productId) => {
-    const foundItem = cartItems.find((item) => item.id === productId);
-    return foundItem ? foundItem.quantity || 1 : 0;
-  };
 
   useEffect(() => {
     document.body.style.overflow = selectedProduct ? 'hidden' : 'auto';
@@ -67,7 +49,7 @@ export default function CategoryDetail({
 
       try {
         const { data, error } = await supabase
-          .from('products')
+          .from('royal_products')
           .select('*')
           .eq('category_id', categoryKey)
           .eq('status', 'active');
@@ -108,6 +90,14 @@ export default function CategoryDetail({
     if (typeof item.name === 'object') {
       return item.name[currentLang] || item.name.ru || item.name.en || '';
     }
+    try {
+      if (typeof item.name === 'string' && item.name.trim().startsWith('{')) {
+        const parsed = JSON.parse(item.name);
+        return parsed[currentLang] || parsed.ru || parsed.en || item.name;
+      }
+    } catch (e) {
+      // JSON parse qilolmasa, oddiy string deb qaytaradi
+    }
     return item.name;
   };
 
@@ -121,22 +111,26 @@ export default function CategoryDetail({
         ? 'Описание отсутствует.'
         : 'No description available.';
     }
-    return typeof desc === 'object' ? desc[currentLang] || desc.ru || '' : desc;
+    if (typeof desc === 'object') {
+      return desc[currentLang] || desc.ru || desc.en || '';
+    }
+    try {
+      if (typeof desc === 'string' && desc.trim().startsWith('{')) {
+        const parsed = JSON.parse(desc);
+        return parsed[currentLang] || parsed.ru || parsed.en || desc;
+      }
+    } catch (e) {
+      // JSON parse xatoligi bo'lsa
+    }
+    return desc;
   };
 
-  const handleDecrement = (e, item) => {
-    e.stopPropagation();
-    if (onRemoveFromCart) {
-      onRemoveFromCart(item);
-    }
-  };
-
-  const handleIncrement = (e, item) => {
-    e.stopPropagation();
-    if (onAddToCart) {
-      onAddToCart(item);
-    }
-  };
+  // const handleIncrement = (e, item) => {
+  //   e.stopPropagation();
+  //   if (onAddToCart) {
+  //     onAddToCart(item);
+  //   }
+  // };
 
   // Modal konteyneri
   const modalContent = selectedProduct && (
@@ -165,70 +159,7 @@ export default function CategoryDetail({
             <div className="modal-product-price">
               {Number(selectedProduct.price).toLocaleString()} <span>{UI_TEXT.currency[currentLang]}</span>
             </div>
-
-            {getItemQuantity(selectedProduct.id) > 0 ? (
-              <div className="quantity-control-btn modal-quantity-control">
-                <button
-                  type="button"
-                  className="qty-btn qty-minus"
-                  onClick={(e) => handleDecrement(e, selectedProduct)}
-                >
-                  –
-                </button>
-                <span className="qty-count">{getItemQuantity(selectedProduct.id)}</span>
-                <button
-                  type="button"
-                  className="qty-btn qty-plus"
-                  onClick={(e) => handleIncrement(e, selectedProduct)}
-                >
-                  +
-                </button>
-              </div>
-            ) : (
-              <button
-                className="modal-add-btn"
-                onClick={(e) => handleIncrement(e, selectedProduct)}
-              >
-                {UI_TEXT.addToCart[currentLang]}
-              </button>
-            )}
           </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  // Floating Savat paneli portal orqali body ga chiqariladi
-  const cartBarContent = (
-    <div className="cart-bar-wrapper">
-      <div className="cart-bar-container" onClick={onOpenCart}>
-        <div className="cart-bar-left">
-          <div className="cart-icon-circle">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="9" cy="21" r="1"></circle>
-              <circle cx="20" cy="21" r="1"></circle>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-            </svg>
-            {totalCartCount > 0 && (
-              <span className="cart-badge-count">{totalCartCount}</span>
-            )}
-          </div>
-          <div className="cart-bar-details">
-            <span className="cart-items-text">
-              {totalCartCount > 0
-                ? `${totalCartCount} ${UI_TEXT.cartItemsCount[currentLang]}`
-                : UI_TEXT.emptyCart[currentLang]}
-            </span>
-            <span className="cart-total-price">
-              {totalCartPrice.toLocaleString()} {UI_TEXT.currency[currentLang]}
-            </span>
-          </div>
-        </div>
-
-        <div className="cart-bar-right">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
         </div>
       </div>
     </div>
@@ -310,68 +241,33 @@ export default function CategoryDetail({
           </p>
         ) : (
           <div className="products-grid">
-            {productsList.map((item) => {
-              const qty = getItemQuantity(item.id);
-
-              return (
-                <div
-                  key={item.id}
-                  className="product-card"
-                  onClick={() => setSelectedProduct(item)}
-                >
-                  <div className="product-img-wrapper">
-                    <img
-                      src={item.image_url || item.image}
-                      alt={getProductName(item)}
-                      className="product-img"
-                    />
-                  </div>
-                  <div className="product-details">
-                    <h3 className="product-name">{getProductName(item)}</h3>
-                    <div className="product-card-footer">
-                      <div className="product-price">
-                        {Number(item.price).toLocaleString()}
-                        <span> {UI_TEXT.currency[currentLang]}</span>
-                      </div>
-
-                      {qty > 0 ? (
-                        <div className="quantity-control-btn" onClick={(e) => e.stopPropagation()}>
-                          <button
-                            type="button"
-                            className="qty-btn qty-minus"
-                            onClick={(e) => handleDecrement(e, item)}
-                          >
-                            –
-                          </button>
-                          <span className="qty-count">{qty}</span>
-                          <button
-                            type="button"
-                            className="qty-btn qty-plus"
-                            onClick={(e) => handleIncrement(e, item)}
-                          >
-                            +
-                          </button>
-                        </div>
-                      ) : (
-                        <button
-                          type="button"
-                          className="add-to-cart-small-btn"
-                          onClick={(e) => handleIncrement(e, item)}
-                        >
-                          +
-                        </button>
-                      )}
+            {productsList.map((item) => (
+              <div
+                key={item.id}
+                className="product-card"
+                onClick={() => setSelectedProduct(item)}
+              >
+                <div className="product-img-wrapper">
+                  <img
+                    src={item.image_url || item.image}
+                    alt={getProductName(item)}
+                    className="product-img"
+                  />
+                </div>
+                <div className="product-details">
+                  <h3 className="product-name">{getProductName(item)}</h3>
+                  <div className="product-card-footer">
+                    <div className="product-price">
+                      {Number(item.price).toLocaleString()}
+                      <span> {UI_TEXT.currency[currentLang]}</span>
                     </div>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         )}
       </main>
-
-      {/* Savat panelini portal orqali body-ga o'tkazish */}
-      {createPortal(cartBarContent, document.body)}
 
       {/* Modal paneli */}
       {selectedProduct && createPortal(modalContent, document.body)}

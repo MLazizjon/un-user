@@ -1,12 +1,20 @@
+:root {
+  --color-bg: #f9f6f0;
+  --color-card: #ffffff;
+  --color-primary-green: #1bb507;
+  --color-dark-green: #148005;
+  --color-text-main: #1c1c1e;
+}
+
 /* Sahifaning silliq ochilishi */
 .fade-in {
-  animation: fadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: fadeIn 0.3s ease-out forwards;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -14,20 +22,21 @@
   }
 }
 
-/* OQ GRADIENT FON */
+/* RASMDAGI KABI OCH-SARIQ/OQ FON */
 .main-page-wrapper {
   width: 100%;
-  max-width: 550px;
+  max-width: 480px;
   min-height: 100vh;
   margin: 0 auto;
-  background: linear-gradient(180deg, #FFFFFF 0%, #F4F5F8 50%, #E9ECEF 100%);
+  background-color: var(--color-bg) !important;
   display: flex;
   flex-direction: column;
   position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 /* ==========================================
-   STICKY & OQ GLASSMORPHISM HEADER
+   HEADER (RASMDAGI KABI TOZA VA ODDIY)
 ========================================== */
 .site-header {
   position: sticky;
@@ -35,153 +44,61 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 10px 16px;
+  background-color: var(--color-bg) !important;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s ease;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* PREMIUM ORTGA BUTTON */
+/* RASMDAGI ORTGA TUGMASI */
 .menu-btn {
   position: relative;
-  width: 132px;
-  height: 52px;
-  border: none;
+  height: 48px;
+  padding: 4px 20px 4px 5px;
+  border: none !important;
   outline: none;
   border-radius: 999px;
-  background: #ffffff;
+  background: #ffffff !important;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 6px;
   cursor: pointer;
-  overflow: hidden;
   flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(92, 21, 28, 0.08);
-  transition: transform .2s ease, box-shadow .25s ease;
-}
-
-.menu-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 24px rgba(92, 21, 28, .12), 0 4px 10px rgba(0, 0, 0, .05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .menu-btn:active {
-  transform: scale(.97);
+  transform: scale(0.96);
 }
 
 .menu-btn-circle {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: #5C151C;
+  background: var(--color-primary-green) !important; /* Rasm xohishingizga ko'ra yashil */
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  position: relative;
-  z-index: 3;
-  transition: all .45s cubic-bezier(.22, 1, .36, 1);
+  color: #ffffff !important;
+  flex-shrink: 0;
 }
 
 .menu-btn-circle svg {
-  width: 20px;
-  height: 20px;
-  transition: transform .35s;
+  width: 18px;
+  height: 18px;
+  stroke: #ffffff !important;
 }
 
 .menu-btn-text {
-  margin-left: 16px;
-  color: #5C151C;
-  font-size: 15px;
+  margin-left: 12px;
+  color: var(--color-dark-green) !important;
+  font-size: 16px;
   font-weight: 700;
-  position: relative;
-  z-index: 3;
-  transition: color .35s, transform .35s;
-}
-
-/* BUTTON ANIMATSIYASI */
-.menu-btn.leaving .menu-btn-circle {
-  width: 120px;
-  border-radius: 999px;
-  justify-content: flex-start;
-  padding-left: 14px;
-  background: linear-gradient(135deg, #5C151C 0%, #7B1F28 100%);
-}
-
-.menu-btn.leaving .menu-btn-circle svg {
-  transform: translateX(-2px);
-}
-
-.menu-btn.leaving .menu-btn-text {
-  color: #ffffff;
-  transform: translateX(-48px);
-}
-
-.menu-btn:hover .menu-btn-circle {
-  transform: scale(1.04);
-}
-
-.menu-btn:hover .menu-btn-text {
-  letter-spacing: .3px;
-}
-
-.menu-btn:focus-visible {
-  outline: 2px solid rgba(92, 21, 28, .35);
-  outline-offset: 3px;
-}
-
-.menu-btn::before {
-  content: "";
-  position: absolute;
-  left: 6px;
-  top: 6px;
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #5C151C 0%, #7B1F28 100%);
-  z-index: 1;
-  transition: width .45s cubic-bezier(.22, 1, .36, 1), left .45s cubic-bezier(.22, 1, .36, 1), opacity .3s;
-}
-
-.menu-btn.leaving::before {
-  width: calc(100% - 12px);
-  left: 6px;
-}
-
-.menu-btn.leaving {
-  box-shadow: 0 12px 30px rgba(92, 21, 28, .25), 0 4px 12px rgba(0, 0, 0, .08);
-}
-
-.menu-btn.leaving .menu-btn-circle {
-  background: transparent;
-}
-
-.menu-btn.leaving .menu-btn-circle svg {
-  color: #ffffff;
-  transform: translateX(-2px);
-}
-
-.menu-btn.leaving .menu-btn-text {
-  color: #ffffff;
-  transform: translateX(-42px);
-}
-
-.menu-btn svg {
-  position: relative;
-  z-index: 3;
-}
-
-.menu-btn-circle,
-.menu-btn-text {
-  will-change: transform;
 }
 
 /* HEADER LOGO */
@@ -193,228 +110,75 @@
 }
 
 .header-logo img {
-  height: 55px;
+  height: 42px;
   width: auto;
   object-fit: contain;
   display: block;
 }
 
-/* Lang Switcher */
+/* TIL SWITCHER (RASMDAGI "UZ" TUGMASI) */
 .lang-switcher-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 6px 12px;
-  min-width: 68px;
+  padding: 0 16px;
   height: 44px;
-  background-color: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 13px;
-  color: #2D3748;
+  background-color: #ffffff !important;
+  border: none !important;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--color-primary-green) !important;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: transform 0.15s ease, background-color 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+  transition: transform 0.15s ease;
   -webkit-tap-highlight-color: transparent;
   flex-shrink: 0;
 }
 
 .lang-switcher-btn:active {
   transform: scale(0.94);
-  background-color: #F7FAFC;
-}
-
-.lang-flag {
-  width: 20px;
-  height: 14px;
-  object-fit: cover;
-  border-radius: 3px;
 }
 
 /* ==========================================
-   3D SMOOTH SURILADIGAN BANNER SLIDER
-========================================== */
-.banner-slider-container {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  margin: 10px 0 16px 0;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.carousel-viewport {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  perspective: 1000px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.carousel-track {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.carousel-slide {
-  position: absolute;
-  width: 62%;
-  height: 170px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-              opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-              filter 0.5s ease;
-  will-change: transform, opacity;
-  cursor: pointer;
-}
-
-.carousel-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-}
-
-.carousel-slide.active {
-  transform: translateX(0) scale(1.05);
-  opacity: 1;
-  z-index: 5;
-  filter: brightness(1);
-}
-
-.carousel-slide.prev {
-  transform: translateX(-68%) scale(0.82);
-  opacity: 0.65;
-  z-index: 3;
-  filter: brightness(0.85);
-}
-
-.carousel-slide.next {
-  transform: translateX(68%) scale(0.82);
-  opacity: 0.65;
-  z-index: 3;
-  filter: brightness(0.85);
-}
-
-.carousel-slide.hidden {
-  transform: translateX(0) scale(0.5);
-  opacity: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.banner-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.88);
-  color: #1A202C;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  width: 34px;
-  height: 34px;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
-  transition: background 0.25s ease, transform 0.2s ease;
-  z-index: 10;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.banner-arrow:hover {
-  background-color: #5C151C;
-  color: #FFFFFF;
-  transform: translateY(-50%) scale(1.1);
-}
-
-.banner-prev {
-  left: 10px;
-}
-
-.banner-next {
-  right: 10px;
-}
-
-.banner-dots {
-  position: absolute;
-  bottom: 2px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 6px;
-  z-index: 10;
-}
-
-.banner-dot {
-  width: 6px;
-  height: 6px;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.banner-dot.active {
-  background-color: #5C151C;
-  width: 18px;
-  border-radius: 4px;
-}
-
-/* ==========================================
-   CATEGORIES GRID
+   KATEGORIYALAR GRIDI (RASMDAGI KABI)
 ========================================== */
 .categories-container {
-  padding: 10px 16px 90px 16px;
+  padding: 10px 16px 40px 16px;
   flex: 1;
 }
 
 .loading-text {
   text-align: center;
-  color: #5C151C;
-  font-size: 16px;
-  font-weight: 600;
+  color: #8e8e93;
+  font-size: 15px;
+  font-weight: 500;
   margin-top: 40px;
 }
 
 .categories-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 14px;
 }
 
 .category-card {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 16px;
+  aspect-ratio: 1.35 / 1; /* Rasmdagi nisbatga mos */
+  border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-  background-color: #FFFFFF;
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease, border-color 0.2s ease;
-  border: 2px solid transparent;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none !important;
   -webkit-tap-highlight-color: transparent;
 }
 
 .category-card:active {
-  transform: scale(0.95);
-  box-shadow: 0 2px 16px rgba(92, 21, 28, 0.25);
-  border-color: #5C151C;
+  transform: scale(0.96);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .category-img {
@@ -422,183 +186,37 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.25s ease;
 }
 
-.category-card:active .category-img {
-  transform: scale(1.06);
-}
-
+/* RASMDAGI MATN SOTASI (OVERLAY) */
 .category-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.2) 60%,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.2) 40%,
     transparent 100%
-  );
+  ) !important;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 10px 8px;
+  padding: 14px 8px;
   text-align: center;
-  transition: background 0.2s ease;
-}
-
-.category-card:active .category-overlay {
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.88) 0%,
-    rgba(0, 0, 0, 0.3) 60%,
-    transparent 100%
-  );
 }
 
 .category-title {
-  color: #FFFFFF;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  transition: transform 0.2s ease;
-}
-
-.category-card:active .category-title {
-  transform: translateY(-1px);
-}
-
-/* ==========================================
-   FLOATING CART BAR (PASTKI SAVATCHA STILI)
-========================================== */
-.cart-bar-wrapper {
-  position: fixed;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  z-index: 1000;
-  padding: 0 16px;
-  box-sizing: border-box;
-}
-
-.cart-bar-container {
-  width: 100%;
-  max-width: 518px;
-  background-color: #5C151C;
-  border-radius: 28px;
-  padding: 8px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: #ffffff;
-  box-shadow: 0 8px 24px rgba(92, 21, 28, 0.35);
-  cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.cart-bar-container:active {
-  transform: scale(0.97);
-  background-color: #4a1016;
-}
-
-.cart-bar-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.cart-icon-circle {
-  position: relative;
-  background-color: rgba(255, 255, 255, 0.15);
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cart-icon-circle svg {
-  stroke: #ffffff;
-}
-
-.cart-badge-count {
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  background-color: #ff3b30;
-  color: #ffffff;
-  font-size: 11px;
-  font-weight: 800;
-  border-radius: 10px;
-  padding: 2px 6px;
-  line-height: 1;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.cart-bar-details {
-  display: flex;
-  flex-direction: column;
-}
-
-.cart-items-text {
-  font-size: 12px;
-  opacity: 0.9;
-  font-weight: 500;
-}
-
-.cart-total-price {
+  color: #ffffff !important;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-.cart-bar-right {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cart-bar-right svg {
-  stroke: #ffffff;
-}
-
-/* PLANSHETLAR UCHUN RESPONSIVE */
-@media screen and (min-width: 600px) and (min-height: 750px) {
+/* RESPONSIVE */
+@media screen and (min-width: 600px) {
   .main-page-wrapper {
-    max-width: 680px;
-  }
-
-  .site-header {
-    padding: 12px 20px;
-  }
-
-  .header-logo img {
-    height: 65px;
-  }
-
-  .banner-slider-container {
-    height: 240px;
-  }
-
-  .carousel-slide {
-    height: 200px;
-  }
-
-  .categories-grid {
-    gap: 14px;
-  }
-
-  .category-card {
-    aspect-ratio: 1.7 / 1;
-    border-radius: 16px;
-  }
-
-  .category-title {
-    font-size: 15px;
+    max-width: 520px;
   }
 }

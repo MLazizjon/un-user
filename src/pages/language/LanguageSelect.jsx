@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './LanguageSelect.css';
-import logoImg from '../../assets/images/imag.png';
+import logoImg from '../../assets/image.png';
 
 const LANGUAGES = [
   { code: 'uz', name: "O'zbek" },
@@ -25,45 +25,59 @@ export const LanguageSelect = ({ onSelectLanguage }) => {
   return (
     <div className="language-page">
       <div className="mobile-container">
-        {/* Background */}
-        <div className="watermark-bg" />
+        {/* Orqa fon bezak effekti */}
+        <div className="watermark-bg"></div>
 
         {/* Header */}
         <div className="header-section">
-          <img
-            src={logoImg}
-            alt="Shirin Tabaka"
-            className="brand-logo"
-            data-aos="zoom-in"
-          />
+          <div className="logo-wrapper" data-aos="zoom-in">
+            <img
+              src={logoImg}
+              alt="Samarqand Un Oshi"
+              className="brand-logo"
+            />
+          </div>
 
-          <div data-aos="fade-up">
+          <div data-aos="fade-up" className="title-wrapper">
             <h1 className="welcome-title">Xush kelibsiz!</h1>
-            <p className="welcome-subtitle">Tilni tanlang</p>
+            <p className="welcome-subtitle">Davom etish uchun tilni tanlang</p>
           </div>
         </div>
 
         {/* Languages */}
         <div className="languages-wrapper">
-          {LANGUAGES.map((lang, index) => (
-            <button
-              key={lang.code}
-              type="button"
-              className={`lang-button ${
-                selectedLang === lang.code ? 'active' : ''
-              }`}
-              onClick={() => handleSelect(lang.code)}
-              data-aos="fade-up"
-              data-aos-delay={100 + index * 100}
-            >
-              <div className="lang-button-left">
-                <span className="lang-text">{lang.name}</span>
-              </div>
-            </button>
-          ))}
+          {LANGUAGES.map((lang, index) => {
+            const isActive = selectedLang === lang.code;
+            return (
+              <button
+                key={lang.code}
+                type="button"
+                className={`lang-button ${isActive ? 'active' : ''}`}
+                onClick={() => handleSelect(lang.code)}
+                data-aos="fade-up"
+                data-aos-delay={100 + index * 100}
+              >
+                <div className="lang-button-left">
+                  <span className="lang-text">{lang.name}</span>
+                </div>
+
+                <div className="arrow-icon">
+                  {isActive ? (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1bb507" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  ) : (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E8E93" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  )}
+                </div>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Footer (mobile-container ichiga ko'chirildi) */}
+        {/* Footer */}
         <div
           className="footer-section"
           data-aos="fade-up"
