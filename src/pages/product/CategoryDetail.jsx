@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { supabase } from '../../supabase/supabesa';
 import './CategoryDetail.css';
-import logoImg from '../../assets/images/imag.png';
+import logoImg from '../../assets/image.png';
 
 const UI_TEXT = {
   backBtn: { uz: 'Ortga', ru: 'Назад', en: 'Back' },
