@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -8,8 +8,6 @@ import LanguageSelect from "./pages/language/LanguageSelect";
 import { supabase } from "./supabase/supabesa";
 
 export default function App() {
-  const touchStartY = useRef(0);
-
   const [currentLanguage, setCurrentLanguage] = useState(
     () => localStorage.getItem("app_language") || "uz"
   );
@@ -38,34 +36,17 @@ export default function App() {
     AOS.refresh();
   }, [showLanguagePage, selectedCategory]);
 
-  // Pull To Refresh ni bloklash
+  // Savatcha modali ochilganda asosiy oynadagi scrollni qulflash
   useEffect(() => {
-    const handleTouchStart = (e) => {
-      touchStartY.current = e.touches[0].clientY;
-    };
-
-    const handleTouchMove = (e) => {
-      if (
-        window.scrollY === 0 &&
-        e.touches[0].clientY > touchStartY.current
-      ) {
-        e.preventDefault();
-      }
-    };
-
-    document.addEventListener("touchstart", handleTouchStart, {
-      passive: true,
-    });
-
-    document.addEventListener("touchmove", handleTouchMove, {
-      passive: false,
-    });
-
+    if (isCartOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
     return () => {
-      document.removeEventListener("touchstart", handleTouchStart);
-      document.removeEventListener("touchmove", handleTouchMove);
+      document.body.style.overflow = "";
     };
-  }, []);
+  }, [isCartOpen]);
 
   // Savatchaga mahsulot qo'shish
   const handleAddToCart = (product) => {
