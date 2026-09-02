@@ -23,7 +23,6 @@ export default function CategoryDetail({
   currentLang = 'ru',
   onBack,
   onChangeLang,
-  // onAddToCart,
 }) {
   const [productsList, setProductsList] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -96,7 +95,7 @@ export default function CategoryDetail({
         return parsed[currentLang] || parsed.ru || parsed.en || item.name;
       }
     } catch (e) {
-      // JSON parse qilolmasa, oddiy string deb qaytaradi
+      // JSON parse xatosi holati uchun
     }
     return item.name;
   };
@@ -120,19 +119,11 @@ export default function CategoryDetail({
         return parsed[currentLang] || parsed.ru || parsed.en || desc;
       }
     } catch (e) {
-      // JSON parse xatoligi bo'lsa
+      // JSON parse xatosi holati uchun
     }
     return desc;
   };
 
-  // const handleIncrement = (e, item) => {
-  //   e.stopPropagation();
-  //   if (onAddToCart) {
-  //     onAddToCart(item);
-  //   }
-  // };
-
-  // Modal konteyneri
   const modalContent = selectedProduct && (
     <div className="product-modal-overlay" onClick={() => setSelectedProduct(null)}>
       <div className="product-modal-content" onClick={(e) => e.stopPropagation()}>
@@ -212,7 +203,7 @@ export default function CategoryDetail({
                 alt={getCategoryName(category)}
                 className="banner-mini-thumb"
               />
-              <div>
+              <div className="banner-title-group">
                 <h1 className="banner-title">{getCategoryName(category)}</h1>
                 <span className="banner-count">
                   {productsList.length} {UI_TEXT.itemsCount[currentLang]}
@@ -232,13 +223,9 @@ export default function CategoryDetail({
         </div>
 
         {isLoading ? (
-          <p style={{ textAlign: 'center', color: '#666', fontSize: '18px', marginTop: '40px' }}>
-            {UI_TEXT.loading[currentLang]}
-          </p>
+          <p className="state-message">{UI_TEXT.loading[currentLang]}</p>
         ) : productsList.length === 0 ? (
-          <p style={{ textAlign: 'center', color: '#666', fontSize: '18px', marginTop: '40px' }}>
-            {UI_TEXT.noProducts[currentLang]}
-          </p>
+          <p className="state-message">{UI_TEXT.noProducts[currentLang]}</p>
         ) : (
           <div className="products-grid">
             {productsList.map((item) => (
@@ -269,7 +256,6 @@ export default function CategoryDetail({
         )}
       </main>
 
-      {/* Modal paneli */}
       {selectedProduct && createPortal(modalContent, document.body)}
     </div>
   );

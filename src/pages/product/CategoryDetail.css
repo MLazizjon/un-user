@@ -1,6 +1,18 @@
 /* ========================================================= */
 /* 1. SAHIFA KONTEYNERI VA OQ GRADIENT DIZAYN */
 /* ========================================================= */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .category-detail-wrapper {
   width: 100%;
   max-width: 550px;
@@ -428,18 +440,20 @@
   justify-content: center !important;
   padding: 20px !important;
   box-sizing: border-box !important;
+  overflow-y: auto !important;
 }
 
 .product-modal-content {
   position: relative !important;
   width: 100% !important;
   max-width: 420px !important;
+  max-height: 90vh !important;
   background-color: #ffffff !important;
   border-radius: 24px !important;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4) !important;
   display: flex !important;
   flex-direction: column !important;
-  overflow: hidden !important;
+  overflow-y: auto !important;
   animation: scaleUpModal 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
