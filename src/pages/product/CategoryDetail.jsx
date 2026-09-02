@@ -29,10 +29,19 @@ export default function CategoryDetail({
   const [isLoading, setIsLoading] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
 
+  // Mobil scroll qotib qolmasligi uchun body overflow boshqaruvi
   useEffect(() => {
-    document.body.style.overflow = selectedProduct ? 'hidden' : 'auto';
+    if (selectedProduct) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
     };
   }, [selectedProduct]);
 
