@@ -7,7 +7,6 @@ import logoImg from '../../assets/image.png';
 const UI_TEXT = {
   backBtn: { uz: 'Ortga', ru: 'Назад', en: 'Back' },
   itemsCount: { uz: 'ta pozitsiya', ru: 'позиций', en: 'items' },
-  currency: { uz: 'soʻm', ru: 'сум', en: 'UZS' },
   closeBtn: { uz: 'Yopish', ru: 'Закрыть', en: 'Close' },
   loading: { uz: 'Yuklanmoqda...', ru: 'Загрузка...', en: 'Loading...' },
   noProducts: {
@@ -145,12 +144,6 @@ export default function CategoryDetail({
         <div className="modal-info-wrapper">
           <h2 className="modal-product-name">{getProductName(selectedProduct)}</h2>
           <p className="modal-product-desc">{getProductDescription(selectedProduct)}</p>
-
-          <div className="modal-footer-row">
-            <div className="modal-product-price">
-              {Number(selectedProduct.price).toLocaleString()} <span>{UI_TEXT.currency[currentLang]}</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -243,12 +236,6 @@ export default function CategoryDetail({
                 </div>
                 <div className="product-details">
                   <h3 className="product-name">{getProductName(item)}</h3>
-                  <div className="product-card-footer">
-                    <div className="product-price">
-                      {Number(item.price).toLocaleString()}
-                      <span> {UI_TEXT.currency[currentLang]}</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             ))}
