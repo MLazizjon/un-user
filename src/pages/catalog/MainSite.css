@@ -4,6 +4,22 @@
   --color-primary-green: #1bb507;
   --color-dark-green: #148005;
   --color-text-main: #1c1c1e;
+  --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 14px rgba(0, 0, 0, 0.08);
+  --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Global scroll to'g'irlash */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  min-height: 100dvh; /* Mobil brauzerlar balandligi uchun fix */
+  background-color: var(--color-bg);
+  overflow-x: hidden;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch; /* iOS Safari silliq skroli */
 }
 
 /* Sahifaning silliq ochilishi */
@@ -22,53 +38,51 @@
   }
 }
 
-/* RASMDAGI KABI OCH-SARIQ/OQ FON */
+/* MAIN PAGE WRAPPER */
 .main-page-wrapper {
   width: 100%;
   max-width: 480px;
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0 auto;
-  background-color: var(--color-bg) !important;
+  background-color: var(--color-bg);
   display: flex;
   flex-direction: column;
   position: relative;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-main);
+  box-sizing: border-box;
 }
 
-/* ==========================================
-   HEADER (RASMDAGI KABI TOZA VA ODDIY)
-========================================== */
+/* HEADER */
 .site-header {
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: var(--color-bg) !important;
+  background-color: var(--color-bg);
   padding: 14px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: none !important;
-  box-shadow: none !important;
 }
 
-/* RASMDAGI ORTGA TUGMASI */
+/* BACK / MENU BUTTON */
 .menu-btn {
   position: relative;
   height: 48px;
   padding: 4px 20px 4px 5px;
-  border: none !important;
+  border: none;
   outline: none;
   border-radius: 999px;
-  background: #ffffff !important;
+  background: var(--color-card);
   display: flex;
   align-items: center;
   justify-content: flex-start;
   cursor: pointer;
   flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+  box-shadow: var(--shadow-light);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -80,23 +94,23 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: var(--color-primary-green) !important; /* Rasm xohishingizga ko'ra yashil */
+  background: var(--color-primary-green);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff !important;
+  color: #ffffff;
   flex-shrink: 0;
 }
 
 .menu-btn-circle svg {
   width: 18px;
   height: 18px;
-  stroke: #ffffff !important;
+  stroke: #ffffff;
 }
 
 .menu-btn-text {
   margin-left: 12px;
-  color: var(--color-dark-green) !important;
+  color: var(--color-dark-green);
   font-size: 16px;
   font-weight: 700;
 }
@@ -116,21 +130,21 @@
   display: block;
 }
 
-/* TIL SWITCHER (RASMDAGI "UZ" TUGMASI) */
+/* LANGUAGE SWITCHER BUTTON */
 .lang-switcher-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 16px;
   height: 44px;
-  background-color: #ffffff !important;
-  border: none !important;
+  background-color: var(--color-card);
+  border: none;
   border-radius: 14px;
   font-weight: 800;
   font-size: 14px;
-  color: var(--color-primary-green) !important;
+  color: var(--color-primary-green);
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+  box-shadow: var(--shadow-light);
   transition: transform 0.15s ease;
   -webkit-tap-highlight-color: transparent;
   flex-shrink: 0;
@@ -140,11 +154,9 @@
   transform: scale(0.94);
 }
 
-/* ==========================================
-   KATEGORIYALAR GRIDI (RASMDAGI KABI)
-========================================== */
+/* CATEGORIES CONTAINER */
 .categories-container {
-  padding: 10px 16px 40px 16px;
+  padding: 10px 16px 80px 16px; /* Pastki qism oxirigacha ko'rinishi uchun padding ko'paytirildi */
   flex: 1;
 }
 
@@ -165,14 +177,14 @@
 .category-card {
   position: relative;
   width: 100%;
-  aspect-ratio: 1.35 / 1; /* Rasmdagi nisbatga mos */
+  aspect-ratio: 1.35 / 1;
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  background-color: #ffffff;
+  box-shadow: var(--shadow-card);
+  background-color: var(--color-card);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: none !important;
+  border: none;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -188,7 +200,7 @@
   display: block;
 }
 
-/* RASMDAGI MATN SOTASI (OVERLAY) */
+/* CATEGORY TEXT OVERLAY */
 .category-overlay {
   position: absolute;
   inset: 0;
@@ -197,7 +209,7 @@
     rgba(0, 0, 0, 0.7) 0%,
     rgba(0, 0, 0, 0.2) 40%,
     transparent 100%
-  ) !important;
+  );
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -206,7 +218,7 @@
 }
 
 .category-title {
-  color: #ffffff !important;
+  color: #ffffff;
   font-size: 15px;
   font-weight: 800;
   letter-spacing: 0.3px;
@@ -214,7 +226,7 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE BREAKPOINT */
 @media screen and (min-width: 600px) {
   .main-page-wrapper {
     max-width: 520px;
