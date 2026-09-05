@@ -1,31 +1,27 @@
-/* App.css */
-
-/* 1. Brauzer va body darajasida skrolni bloklash */
+/* 1. Brauzer va body darajasida erkin skroll berish */
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
-  overflow: hidden !important; /* Skrol paneli yo'qoladi va surish taqiqlanadi */
-  touch-action: none; /* Mobil qurilmalarda touch-scroll/swipe taqiqlanadi */
-  position: fixed; /* Ekran joyida qimirlamay qolishi uchun */
+  min-height: 100vh;
+  background-color: #f9f6f0;
+  overflow-y: auto !important; /* Sahifa erkin pastga skroll bo'ladi */
+  -webkit-overflow-scrolling: touch;
 }
 
-/* 2. Asosiy konteynerni ekran o'lchamiga moslash */
+/* 2. Asosiy konteynerni to'liq kenglik va moslashuvchan qilish */
 #root,
 .app-main-container {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden !important;
+  width: 100%;
+  min-height: 100vh;
   position: relative;
+  overflow-y: visible !important;
 }
 
-/* Standart React shabloni kodi (Izohdan chiqarilgan va keraksizlari olib tashlangan) */
+/* Qolgan standart kodlar */
 .App {
   text-align: center;
-  height: 100vh;
-  overflow: hidden;
 }
 
 .App-logo {
@@ -41,7 +37,7 @@ body {
 
 .App-header {
   background-color: #282c34;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -5,28 +5,29 @@
   box-sizing: border-box;
 }
 
-html {
-  height: -webkit-fill-available;
-}
-
 html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  overscroll-behavior-y: none; /* Mobil brauzerlarda rezinli qotib qolishni oldini oladi */
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 100% !important;
+  background-color: #f4f5f8 !important;
+  overflow-y: auto !important;
+  position: static !important;
   -webkit-overflow-scrolling: touch;
 }
 
 .category-detail-wrapper {
-  width: 100%;
-  max-width: 550px;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  margin: 0 auto;
+  width: 100% !important;
+  max-width: 550px !important;
+  height: auto !important;
+  min-height: 100vh !important;
+  margin: 0 auto !important;
   background: linear-gradient(180deg, #ffffff 0%, #f4f5f8 50%, #e9ecef 100%);
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  overflow: visible !important;
 }
 
 /* Header */
@@ -185,8 +186,10 @@ html, body {
 }
 
 .category-main-content {
-  padding: 10px 16px 80px 16px; /* Pastida scroll bo'g'ilishining oldini olish uchun pad qoldirildi */
-  flex: 1;
+  padding: 10px 16px 200px 16px !important; /* Oxirgi elementlar bemalol ko'rinishi uchun pastki joy kattalashtirildi */
+  flex: 1 !important;
+  height: auto !important;
+  overflow: visible !important;
 }
 
 .state-message {
@@ -287,6 +290,7 @@ html, body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
+  overflow: visible !important;
 }
 
 .product-card {
@@ -337,25 +341,6 @@ html, body {
   overflow: hidden;
 }
 
-.product-card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-  padding-top: 6px;
-}
-
-.product-price {
-  font-size: 14px;
-  font-weight: 900;
-  color: #111111;
-}
-
-.product-price span {
-  font-size: 11px;
-  font-weight: 700;
-}
-
 /* ========================================================= */
 /* 4. MODAL OYNA */
 /* ========================================================= */
@@ -374,7 +359,6 @@ html, body {
   justify-content: center !important;
   padding: 20px !important;
   box-sizing: border-box !important;
-  touch-action: pan-y;
 }
 
 .product-modal-content {
@@ -448,27 +432,8 @@ html, body {
 .modal-product-desc {
   font-size: 14px;
   color: #666666;
-  margin: 0 0 20px 0;
+  margin: 0;
   line-height: 1.5;
-}
-
-.modal-footer-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-  gap: 12px;
-}
-
-.modal-product-price {
-  font-size: 20px;
-  font-weight: 900;
-  color: #111111;
-}
-
-.modal-product-price span {
-  font-size: 15px;
-  font-weight: 700;
 }
 
 /* ========================================================= */
@@ -507,6 +472,5 @@ html, body {
 
   .products-grid {
     gap: 14px;
-    
   }
 }
